@@ -1,12 +1,11 @@
 package client.movieapp;
 
-import client.movieapp.movieshowdata.*;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import client.movieapp.movieshowdata.ApplicationData;
+import client.movieapp.movieshowdata.BridgeControllerInstance;
+import client.movieapp.movieshowdata.MovieDefinition;
+import client.movieapp.movieshowdata.ShowDefinition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,8 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +25,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -68,10 +66,7 @@ public class MovieController implements Initializable {
      * The App data object.
      */
     ApplicationData appDataObject = new ApplicationData();
-    /**
-     * The Genre list.
-     */
-    ArrayList<String> genreList;
+
     /**
      * The Movies to render.
      */
@@ -87,20 +82,10 @@ public class MovieController implements Initializable {
      */
     String currentPage = "Movies";
     /**
-     * The Browser.
-     */
-    WebView browser = new WebView();
-    /**
-     * The Web engine.
-     */
-    WebEngine webEngine = browser.getEngine();
-    /**
      * The Movie detail box.
      */
     VBox[] movieDetailBox = new VBox[40];
 
-    @FXML
-    private ListView<String> genres;
     @FXML
     private HBox movieBox = new HBox();
     @FXML
@@ -127,14 +112,11 @@ public class MovieController implements Initializable {
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         //  sidebar
         genreView.getItems().addAll(genreTotal);
-        genreView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            //  Getting the genre and filtering the movies or shows list
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                genreView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-                currentGenre = genreView.getSelectionModel().getSelectedItems();
-                filterByGenre(currentGenre);
-            }
+        //  Getting the genre and filtering the movies or shows list
+        genreView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            genreView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            currentGenre = genreView.getSelectionModel().getSelectedItems();
+            filterByGenre(currentGenre);
         });
         // getting all the movies and assigning them to movies to render
         if (switchCount == 0) {
@@ -174,7 +156,7 @@ public class MovieController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("movieSceneIndividual.fxml"));
         root = loader.load();
         //   setting the scene with new fxml
-        String css = this.getClass().getResource("appHome.css").toExternalForm();
+        String css = Objects.requireNonNull(this.getClass().getResource("appHome.css")).toExternalForm();
         // add the stylesheet to the scene
         scene = new Scene(root);
         scene.getStylesheets().add(css);
@@ -204,7 +186,7 @@ public class MovieController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("movieSceneIndividual.fxml"));
         root = loader.load();
         //   setting the scene with new fxml
-        String css = this.getClass().getResource("appHome.css").toExternalForm();
+        String css = Objects.requireNonNull(this.getClass().getResource("appHome.css")).toExternalForm();
         // add the stylesheet to the scene
         scene = new Scene(root);
         scene.getStylesheets().add(css);
@@ -248,14 +230,11 @@ public class MovieController implements Initializable {
 
             // Adding an action listener on the title to switch movies to the individual scenes and sending the data
             // to the function defined to handle switch scenes
-            movieTitle.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-                        handleSwitchScenesMovies(movieToPass, event);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+            movieTitle.setOnAction(event -> {
+                try {
+                    handleSwitchScenesMovies(movieToPass, event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
             // url to retrieve the posters for the movies after getting the paths from API call
@@ -288,7 +267,7 @@ public class MovieController implements Initializable {
             movieDetailBox[i].getStyleClass().add("anchor-pane");
             movieButton.getStyleClass().remove("light");
             movieButton.getStyleClass().add("primary");
-            showButton.getStyleClass().removeAll(new String[]{"primary", "corner"});
+            showButton.getStyleClass().removeAll("primary", "corner");
             showButton.getStyleClass().add("light");
             mainParent.getStyleClass().add("anchor-pane");
             moviePane.getStyleClass().add("anchor-pane");
@@ -313,14 +292,11 @@ public class MovieController implements Initializable {
 
             // Adding an action listener on the title to switch movies to the individual scenes and sending the data
             // to the function defined to handle switch scenes
-            showTitle.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-                        handleSwitchSceneShows(showToPass, event);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+            showTitle.setOnAction(event -> {
+                try {
+                    handleSwitchSceneShows(showToPass, event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
             // url to retrieve the posters for the movies after getting the paths from API call
@@ -353,7 +329,7 @@ public class MovieController implements Initializable {
             movieDetailBox[i].getStyleClass().add("anchor-pane");
             movieButton.getStyleClass().remove("light");
             movieButton.getStyleClass().add("primary");
-            showButton.getStyleClass().removeAll(new String[]{"primary", "corner"});
+            showButton.getStyleClass().removeAll("primary", "corner");
             showButton.getStyleClass().add("light");
             mainParent.getStyleClass().add("anchor-pane");
             moviePane.getStyleClass().add("anchor-pane");
@@ -407,9 +383,9 @@ public class MovieController implements Initializable {
         // never show vertical scroll bar for movie pane
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         // getting all the movies and assigning them to movies to render
-        movieButton.getStyleClass().removeAll(new String[]{"light", "primary", "corner"});
+        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         movieButton.getStyleClass().add("light");
-        movieButton.getStyleClass().removeAll(new String[]{"light", "primary", "corner"});
+        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         showButton.getStyleClass().add("primary");
         mainParent.getStyleClass().add("anchor-pane");
         moviePane.getStyleClass().add("anchor-pane");
@@ -434,9 +410,9 @@ public class MovieController implements Initializable {
         // never show vertical scroll bar for movie pane
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         // getting all the movies and assigning them to movies to render
-        movieButton.getStyleClass().removeAll(new String[]{"light", "primary", "corner"});
+        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         movieButton.getStyleClass().add("primary");
-        movieButton.getStyleClass().removeAll(new String[]{"light", "primary", "corner"});
+        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         showButton.getStyleClass().add("light");
         mainParent.getStyleClass().add("anchor-pane");
         moviePane.getStyleClass().add("anchor-pane");
@@ -448,18 +424,18 @@ public class MovieController implements Initializable {
     }
 
     void filterByGenre(ObservableList<String> genres) {
-        int count  = 0;
+        int count = 0;
         //  remove everything and re render
         movieBox.getChildren().removeAll(movieBox.getChildren());
-        List<MovieDefinition> filteredMovie = new ArrayList<MovieDefinition>();
-        List<ShowDefinition> filteredShow = new ArrayList<ShowDefinition>();
+        List<MovieDefinition> filteredMovie = new ArrayList<>();
+        List<ShowDefinition> filteredShow = new ArrayList<>();
         if (currentPage.equals("Movies")) {
             for (String genre :
                     genres
             ) {
                 for (MovieDefinition movie :
                         moviesToRender) {
-                    if (!filteredMovie.contains(movie)){
+                    if (!filteredMovie.contains(movie)) {
                         if (movie.getGenre_1().equals(genre)) {
                             System.out.println("comparing genre " + genre + ", movie: " + movie.getGenre_1());
                             filteredMovie.add(movie);
@@ -474,14 +450,13 @@ public class MovieController implements Initializable {
             }
             // pass to movies render box
             setMoviesInHbox(filteredMovie);
-        }
-        else if (currentPage.equals("Shows")) {
+        } else if (currentPage.equals("Shows")) {
             for (String genre :
                     genres
             ) {
                 for (ShowDefinition show :
                         showsToRender) {
-                    if (!filteredShow.contains(show)){
+                    if (!filteredShow.contains(show)) {
                         if (show.getGenre_1().equals(genre)) {
                             filteredShow.add(show);
                         } else if (show.getGenre_2() != null && show.getGenre_2().equals(genre)) {
@@ -490,8 +465,8 @@ public class MovieController implements Initializable {
                     }
                 }
             }
-        //     pass to the render shows function
-        setShowsInHBox(filteredShow);
+            //     pass to the render shows function
+            setShowsInHBox(filteredShow);
 
         }
         System.out.println(count);
