@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane prefHeight="423.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.movieapp.RegisterPage">
+   <children>
+      <BorderPane fx:id="registerBox" layoutX="39.0" layoutY="24.0" prefHeight="375.0" prefWidth="570.0">
+         <center>
+            <AnchorPane prefHeight="330.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="24.0" layoutY="14.0" prefHeight="22.0" prefWidth="95.0" text="Register to TMD" />
+                  <TextField fx:id="firstName" layoutX="26.0" layoutY="51.0" prefHeight="34.0" prefWidth="189.0" promptText="Enter your first name" />
+                  <TextField fx:id="lastName" layoutX="25.0" layoutY="99.0" prefHeight="31.0" prefWidth="189.0" promptText="Enter your last name" />
+                  <TextField fx:id="emailField" layoutX="25.0" layoutY="143.0" prefHeight="29.0" prefWidth="192.0" promptText="Enter your username" />
+                  <TextField fx:id="passwordField" layoutX="26.0" layoutY="186.0" prefHeight="29.0" prefWidth="190.0" promptText="Enter your password" />
+                  <Button fx:id="signUpButton" layoutX="38.0" layoutY="231.0" mnemonicParsing="false" onAction="#signUp" prefHeight="26.0" prefWidth="166.0" text="Sign up now" />
+                  <Label layoutX="26.0" layoutY="270.0" text="Already have an account?" />
+                  <Hyperlink fx:id="loginRedirectLabel" layoutX="168.0" layoutY="267.0" onAction="#switchToLoginPage" text="Go to login page" />
+                  <Label fx:id="invalidPasswordlLabel" layoutX="23.0" layoutY="299.0" prefHeight="17.0" prefWidth="176.0" textFill="#eb0000" />
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="34.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="206.0" layoutY="15.0" text="The Movies Database" />
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

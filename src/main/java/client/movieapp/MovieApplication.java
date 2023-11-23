@@ -32,7 +32,7 @@ public class MovieApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("movieSceneHome.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieApplication.class.getResource("RegisterLoginPage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         // Adding the appHome.css file from the resources directory
