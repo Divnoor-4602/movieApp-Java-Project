@@ -44,7 +44,7 @@ public class RegisterPage implements Initializable {
     @FXML
     public Label invalidPasswordLabel;
 
-     static boolean invalidPass = false;
+    static boolean invalidPass = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,7 +54,6 @@ public class RegisterPage implements Initializable {
             invalidPasswordLabel.setText("");
         }
     }
-
 
 
     @FXML
@@ -91,9 +90,7 @@ public class RegisterPage implements Initializable {
     public void switchToLoginPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterloginPage.fxml"));
         root = loader.load();
-        
-
-
+        //    todo: complete this
     }
 
     public boolean emailValidator(String email) {

@@ -1,4 +1,6 @@
 package client.movieapp;
+// todo: convert show button to primary when shows are selected
+// todo: use filter and search bar together
 
 import client.movieapp.movieshowdata.ApplicationData;
 import client.movieapp.movieshowdata.BridgeControllerInstance;
@@ -127,6 +129,7 @@ public class MovieController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        movieButton.getStyleClass().add("primary");
 
         setMoviesInHbox(moviesToRender);
         // increasing the switch count so that api is not called again and again;
@@ -265,10 +268,7 @@ public class MovieController implements Initializable {
             movieDetailBox[i].setId("movieDetailsV");
             // Add the movie vbox to horizontal scroll pane
             movieDetailBox[i].getStyleClass().add("anchor-pane");
-            movieButton.getStyleClass().remove("light");
-            movieButton.getStyleClass().add("primary");
-            showButton.getStyleClass().removeAll("primary", "corner");
-            showButton.getStyleClass().add("light");
+
             mainParent.getStyleClass().add("anchor-pane");
             moviePane.getStyleClass().add("anchor-pane");
             movieBox.getStyleClass().add("anchor-pane");
@@ -327,10 +327,7 @@ public class MovieController implements Initializable {
             movieDetailBox[i].setId("movieDetailsV");
             // Add the movie vbox to horizontal scroll pane
             movieDetailBox[i].getStyleClass().add("anchor-pane");
-            movieButton.getStyleClass().remove("light");
-            movieButton.getStyleClass().add("primary");
-            showButton.getStyleClass().removeAll("primary", "corner");
-            showButton.getStyleClass().add("light");
+
             mainParent.getStyleClass().add("anchor-pane");
             moviePane.getStyleClass().add("anchor-pane");
             movieBox.getStyleClass().add("anchor-pane");
@@ -383,9 +380,8 @@ public class MovieController implements Initializable {
         // never show vertical scroll bar for movie pane
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         // getting all the movies and assigning them to movies to render
-        movieButton.getStyleClass().removeAll("light", "primary", "corner");
+        movieButton.getStyleClass().remove("primary");
         movieButton.getStyleClass().add("light");
-        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         showButton.getStyleClass().add("primary");
         mainParent.getStyleClass().add("anchor-pane");
         moviePane.getStyleClass().add("anchor-pane");
@@ -410,9 +406,8 @@ public class MovieController implements Initializable {
         // never show vertical scroll bar for movie pane
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         // getting all the movies and assigning them to movies to render
-        movieButton.getStyleClass().removeAll("light", "primary", "corner");
         movieButton.getStyleClass().add("primary");
-        movieButton.getStyleClass().removeAll("light", "primary", "corner");
+        showButton.getStyleClass().remove("primary");
         showButton.getStyleClass().add("light");
         mainParent.getStyleClass().add("anchor-pane");
         moviePane.getStyleClass().add("anchor-pane");
