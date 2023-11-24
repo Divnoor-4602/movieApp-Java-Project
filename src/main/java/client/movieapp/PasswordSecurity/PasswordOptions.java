@@ -3,6 +3,7 @@ package client.movieapp.PasswordSecurity;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 // class to create password hashes
 public class PasswordOptions {
@@ -20,11 +21,8 @@ public class PasswordOptions {
 
     // check if the password length is above 8 and has a special character
     public static boolean passwordValidator(String password) {
-        if (password.length() < 8) {
-            return false;
-        } else {
-            return password.contains("@");
-        // todo: add all special characters to check
-        }
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+        // regex for validating passwords and returning true or false
+        return Pattern.compile(regex).matcher(password).matches();
     }
 }
