@@ -7,13 +7,13 @@ module client.movieapp {
     requires org.kordamp.ikonli.javafx;
     requires java.net.http;
 
-    requires javafx.web;
     requires java.desktop;
     requires com.google.gson;
+    requires javafx.web;
 
 
     exports client.movieapp.movieshowdata;
-    opens client.movieapp.movieshowdata to com.google.gson, javafx.fxml, javafx.web;
+    opens client.movieapp.movieshowdata to javafx.web, com.google.gson, javafx.fxml;
     exports client.movieapp;
     opens client.movieapp to  com.google.gson, javafx.fxml, javafx.web;
 

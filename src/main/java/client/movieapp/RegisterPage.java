@@ -13,9 +13,11 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -39,6 +41,10 @@ public class RegisterPage implements Initializable {
     @FXML
     private AnchorPane outerPane;
     @FXML
+    private AnchorPane innerPane;
+    @FXML
+    private AnchorPane lowerPane;
+    @FXML
     public TextField passwordField;
     @FXML
     public Button signUpButton;
@@ -57,6 +63,9 @@ public class RegisterPage implements Initializable {
             invalidPasswordLabel.setText("");
         }
         outerPane.getStyleClass().add("outerPane");
+        innerPane.getStyleClass().add("registerInnerPane");
+        lowerPane.getStyleClass().add("lowerPane");
+        signUpButton.getStyleClass().add("success");
     }
 
 
@@ -79,6 +88,10 @@ public class RegisterPage implements Initializable {
             root = loader.load();
             stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            // Adding the appHome.css file from the resources directory
+            String css = this.getClass().getResource("appHome.css").toExternalForm();
+            // add the stylesheet to the scene
+            scene.getStylesheets().add(css);
             // setting invalid password label
             stage.setScene(scene);
         }
@@ -99,7 +112,7 @@ public class RegisterPage implements Initializable {
     public boolean emailValidator(String email) {
         // using regex symbols to check email validation
         String regexPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-        //  checks numerics from 0-9, uppercase and lowercase, dot not allowed at start
+        // checks numerics from 0-9, uppercase and lowercase, dot not allowed at start
         // return a boolean if the email entered matches the requirements
         return Pattern.compile(regexPattern).matcher(email).matches();
 

@@ -59,6 +59,10 @@ public class RegisterLoginPage implements Initializable {
         Parent root = loader.load();
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        // Adding the appHome.css file from the resources directory
+        String css = this.getClass().getResource("appHome.css").toExternalForm();
+        // add the stylesheet to the scene
+        scene.getStylesheets().add(css);
         stage.setScene(scene);
 
     }
@@ -80,6 +84,7 @@ public class RegisterLoginPage implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // companyImageBox = new ImageView(new Image("/Users/divnoor/IdeaProjects/javafx-learning/movieApp/src/main/java/client/movieapp/—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
         // companyImageBox = new ImageView(new Image("—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
+
         outerPane.getStyleClass().add("outerPane");
         mainLoginBox.getStyleClass().add("innerPane");
         rightPane.getStyleClass().add("rightPane");

@@ -129,6 +129,7 @@ public class MovieController implements Initializable {
             currentGenre = genreView.getSelectionModel().getSelectedItems();
             filterByGenre(currentGenre);
         });
+
         // getting all the movies and assigning them to movies to render
         if (switchCount == 0) {
             try {
