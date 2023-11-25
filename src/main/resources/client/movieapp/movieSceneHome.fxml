@@ -2,32 +2,40 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainParent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1015.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.movieapp.MovieController">
     <children>
-        <TextField fx:id="searchBox" layoutX="168.0" layoutY="26.0" prefHeight="37.0" prefWidth="440.0" promptText="Search for Movies and TV shows" />
-        <Button fx:id="search" layoutX="616.0" layoutY="26.0" mnemonicParsing="false" onAction="#search" prefHeight="37.0" prefWidth="73.0" text="Search" textFill="WHITE">
+        <TextField fx:id="searchBox" layoutX="236.0" layoutY="26.0" prefHeight="37.0" prefWidth="440.0" promptText="Search for Movies and TV shows" />
+        <Button fx:id="search" layoutX="685.0" layoutY="26.0" mnemonicParsing="false" onAction="#search" prefHeight="37.0" prefWidth="73.0" text="Search" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <ListView fx:id="genreView" layoutX="529.0" layoutY="216.0" prefHeight="396.0" prefWidth="124.0" />
+        <ListView fx:id="genreView" layoutX="36.0" layoutY="105.0" prefHeight="396.0" prefWidth="124.0" />
         <ScrollPane fx:id="moviePane" layoutX="170.0" layoutY="116.0" prefHeight="239.0" prefWidth="675.0" style="-fx-background-color: #121212;" AnchorPane.bottomAnchor="285.0">
             <content>
                 <HBox fx:id="movieBox" style="-fx-background-color: #121212;" />
             </content>
         </ScrollPane>
-        <Button fx:id="movieButton" layoutX="741.0" layoutY="26.0" mnemonicParsing="false" onAction="#showMovies" prefHeight="37.0" prefWidth="66.0" text="Movies">
+        <Button fx:id="movieButton" layoutX="793.0" layoutY="26.0" mnemonicParsing="false" onAction="#showMovies" prefHeight="37.0" prefWidth="66.0" text="Movies">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button fx:id="showButton" layoutX="813.0" layoutY="26.0" mnemonicParsing="false" onAction="#showShows" prefHeight="37.0" prefWidth="66.0" text="Shows">
+        <Button fx:id="showButton" layoutX="870.0" layoutY="26.0" mnemonicParsing="false" onAction="#showShows" prefHeight="37.0" prefWidth="66.0" text="Shows">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
+      <Label fx:id="userNameLabel" layoutX="36.0" layoutY="26.0" prefHeight="37.0" prefWidth="188.0" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="logoutButton" layoutX="36.0" layoutY="587.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="31.0" prefWidth="81.0" styleClass="danger" stylesheets="@appHome.css" text="Log out" />
     </children>
 </AnchorPane>

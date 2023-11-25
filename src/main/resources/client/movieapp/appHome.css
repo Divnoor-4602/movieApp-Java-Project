@@ -1,6 +1,9 @@
 .root {
     -fx-body-color: #1c1c1c;
     -fx-outer-border: #222222;
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
 }
 
 .anchor-pane {
@@ -11,10 +14,11 @@
 }
 
 .padding {
-    -fx-padding:0 0 0 100;
+    -fx-padding: 0 0 0 100;
     -fx-background-inset: 0 0 0 100;
 }
-.inputBox{
+
+.inputBox {
     -fx-text-fill: black;
     -fx-background-color: black;
     -fx-text-inner-color: black;
@@ -35,19 +39,42 @@
     -fx-scale-z: 1.06;
 }
 
-.outerPane{
+.outerPane {
     -fx-background-color: white;
 }
 
-.innerPane{
+.innerPane {
     -fx-background-color: black;
     -fx-effect: dropshadow(three-pass-box, black, 15, 0, 0, 0);
     -fx-text-fill: white;
+    -fx-background-radius: 10 10 10 10;
 }
-.rightPane{
+
+.rightPane {
     -fx-text-fill: white;
 }
 
+.registerInnerPane {
+    -fx-background-color: black;
+    -fx-effect: dropshadow(three-pass-box, black, 15, 0, 0, 0);
+    -fx-text-fill: white;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.lowerPane {
+    -fx-background-color: black;
+    -fx-effect: dropshadow(three-pass-box, black, 15, 0, 0, 0);
+    -fx-text-fill: white;
+    -fx-background-radius: 0 0 10 10;
+
+}
+
+.signUpButton {
+    -fx-background-color: #fa2323;
+    -fx-border-color: #fa2323;
+    -fx-text-fill: #fa2323;
+    -fx-background-radius: 7 7 7 7;
+}
 
 .button:focused, .toggle-button:focused,
 .split-menu-button:focused, .menu-button:focused,

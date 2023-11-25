@@ -11,6 +11,7 @@ public class BridgeControllerInstance {
     private String movieDescriptions;
     private String movieRating;
     private String movieReleaseDate;
+    private String currentUser;
 
     public String getMoviePoster() {
 
@@ -84,5 +85,13 @@ public class BridgeControllerInstance {
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
 }

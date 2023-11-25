@@ -1,10 +1,12 @@
 package client.movieapp;
 
 import client.movieapp.PasswordSecurity.PasswordOptions;
+import client.movieapp.movieshowdata.BridgeControllerInstance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,6 +36,10 @@ public class RegisterLoginPage implements Initializable {
     public Label companyTitle;
     @FXML
     public Label emailLabel;
+    @FXML
+    public Label invalidPasswordLabel;
+    @FXML
+    public Label invalidEmailLabel;
 
     @FXML
     private AnchorPane outerPane;
@@ -53,13 +59,47 @@ public class RegisterLoginPage implements Initializable {
     @FXML
     public Hyperlink createNewAccountPage;
 
-    @FXML
-    public void registerNewAccount(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterPage.fxml"));
+    static Boolean invalidPassword = false;
+
+    public void loadScene(String nameFXML, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFXML));
         Parent root = loader.load();
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        // Adding the appHome.css file from the resources directory
+        String css = this.getClass().getResource("appHome.css").toExternalForm();
+        // add the stylesheet to the scene
+        scene.getStylesheets().add(css);
+        // setting invalid password label
         stage.setScene(scene);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // companyImageBox = new ImageView(new Image("/Users/divnoor/IdeaProjects/javafx-learning/movieApp/src/main/java/client/movieapp/—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
+        // companyImageBox = new ImageView(new Image("—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
+        if (invalidPassword) {
+            invalidEmailLabel.setText("Invalid email");
+            invalidPasswordLabel.setText("Invalid password");
+            invalidPassword = false;
+        } else {
+            invalidPasswordLabel.setText("");
+            invalidEmailLabel.setText("");
+        }
+
+        outerPane.getStyleClass().add("outerPane");
+        mainLoginBox.getStyleClass().add("innerPane");
+        rightPane.getStyleClass().add("rightPane");
+        loginInButton.getStyleClass().add("outerPane");
+        emailTextBox.getStyleClass().add("inputBox");
+        passwordTextBox.getStyleClass().add("inputBox");
+
+    }
+
+
+    @FXML
+    public void registerNewAccount(ActionEvent event) throws IOException {
+        loadScene("RegisterPage.fxml", event);
 
     }
 
@@ -70,23 +110,18 @@ public class RegisterLoginPage implements Initializable {
         String emailAddress = emailTextBox.getText();
         // create a password hash by getting the password from the user and save it in variable
         String passwordUser = PasswordOptions.passwordEncryptor(passwordTextBox.getText());
-        // todo: create a function to check if the password entered matches with the email address
+        // login the user and match the password using this function
+        boolean passwordMatched = MongoDatabaseControl.loginRegisteredUser(emailAddress, passwordUser);
+        System.out.println(passwordMatched);
+        if (passwordMatched) {
+            loadScene("movieSceneHome.fxml", event);
+        } else {
+            invalidPassword = true;
+            loadScene("RegisterLoginPage.fxml", event);
+        }
 
 
         System.out.println(passwordUser);
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // companyImageBox = new ImageView(new Image("/Users/divnoor/IdeaProjects/javafx-learning/movieApp/src/main/java/client/movieapp/—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
-        // companyImageBox = new ImageView(new Image("—Pngtree—cartoon movie popcorn film glasses_6125864.png"));
-        outerPane.getStyleClass().add("outerPane");
-        mainLoginBox.getStyleClass().add("innerPane");
-        rightPane.getStyleClass().add("rightPane");
-        loginInButton.getStyleClass().add("outerPane");
-        emailTextBox.getStyleClass().add("inputBox");
-        passwordTextBox.getStyleClass().add("inputBox");
-
     }
 }
 

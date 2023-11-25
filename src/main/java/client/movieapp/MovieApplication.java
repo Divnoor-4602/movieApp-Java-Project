@@ -1,9 +1,3 @@
-// todo: Make a home page with options to register and login
-// todo: Both the pages should allow for username and password
-// todo: The register page should save the details
-// todo: the login page should check the saved details and retrieve the following: movielist saved to the user
-
-// todo: implement another panel for a movie and show list
 // todo: make an add button on every movie which on click should add it to the users movie and show list
 // todo: make a remove button which removes the movie from the users list
 
@@ -11,7 +5,7 @@
 
 // todo: make a logout button to logout the user and reset all information and retrieves the login and register page
 
-// todo: set resizable to false
+
 
 
 package client.movieapp;

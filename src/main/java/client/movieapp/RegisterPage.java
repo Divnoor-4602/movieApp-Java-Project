@@ -39,6 +39,10 @@ public class RegisterPage implements Initializable {
     @FXML
     private AnchorPane outerPane;
     @FXML
+    private AnchorPane innerPane;
+    @FXML
+    private AnchorPane lowerPane;
+    @FXML
     public TextField passwordField;
     @FXML
     public Button signUpButton;
@@ -57,6 +61,22 @@ public class RegisterPage implements Initializable {
             invalidPasswordLabel.setText("");
         }
         outerPane.getStyleClass().add("outerPane");
+        innerPane.getStyleClass().add("registerInnerPane");
+        lowerPane.getStyleClass().add("lowerPane");
+        signUpButton.getStyleClass().add("success");
+    }
+
+    public void loadScene(String nameFXML, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFXML));
+        root = loader.load();
+        stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        // Adding the appHome.css file from the resources directory
+        String css = this.getClass().getResource("appHome.css").toExternalForm();
+        // add the stylesheet to the scene
+        scene.getStylesheets().add(css);
+        // setting invalid password label
+        stage.setScene(scene);
     }
 
 
@@ -72,34 +92,31 @@ public class RegisterPage implements Initializable {
         if (PasswordOptions.passwordValidator(passwordField.getText()) && emailValidator(email)) {
             passwordUser = PasswordOptions.passwordEncryptor(passwordField.getText().toLowerCase());
             invalidPass = false;
+            // calls mongo db class and register method to save details in mongo db database
+            boolean registrationStatus  = MongoDatabaseControl.registerNewPerson(nameInitial, nameEnd, email, passwordUser);
+            if (registrationStatus) {
+                loadScene("movieSceneHome.fxml", event);
+            } else {
+                loadScene("registerPage.fxml", event);
+            }
+            // on successful register render the user to the movie application page
         } else {
             // if the password is not correct, make the user re-enter the password
             invalidPass = true;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterPage.fxml"));
-            root = loader.load();
-            stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            // setting invalid password label
-            stage.setScene(scene);
+            loadScene("registerPage.fxml", event);
         }
-        System.out.println("Passwords is" + passwordUser);
+        System.out.println("Passwords is " + passwordUser);
     }
-
-    // todo: save all this data to a mongodb database and link the register page to the login page
-    // todo: if the user is successfully logged in go to the movie app otherwise re render the login page or
-    // todo: go to register page if the email address does not exist in the database
 
     @FXML
     public void switchToLoginPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterloginPage.fxml"));
-        root = loader.load();
-        //    todo: complete this
+        loadScene("RegisterLoginPage.fxml", event);
     }
 
     public boolean emailValidator(String email) {
         // using regex symbols to check email validation
         String regexPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-        //  checks numerics from 0-9, uppercase and lowercase, dot not allowed at start
+        // checks numerics from 0-9, uppercase and lowercase, dot not allowed at start
         // return a boolean if the email entered matches the requirements
         return Pattern.compile(regexPattern).matcher(email).matches();
 
