@@ -36,17 +36,11 @@ public class MovieController implements Initializable {
     /**
      * The Main parent.
      */
-    @FXML
     public AnchorPane mainParent;
     /**
      * The Genre view.
      */
-    @FXML
     public ListView<String> genreView;
-    @FXML
-    public Label userNameLabel;
-    @FXML
-    public Button logoutButton;
     /**
      * The Genre total.
      */
@@ -127,7 +121,6 @@ public class MovieController implements Initializable {
 
         // never show vertical scroll bar for movie pane
         moviePane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        userNameLabel.setText(data.getCurrentUser());
         //  sidebar
         genreView.getItems().addAll(genreTotal);
         //  Getting the genre and filtering the movies or shows list
@@ -136,8 +129,6 @@ public class MovieController implements Initializable {
             currentGenre = genreView.getSelectionModel().getSelectedItems();
             filterByGenre(currentGenre);
         });
-
-
         // getting all the movies and assigning them to movies to render
         if (switchCount == 0) {
             try {
@@ -512,20 +503,6 @@ public class MovieController implements Initializable {
         System.out.println(count);
 
 
-    }
-
-    public void logoutUser(ActionEvent event) throws IOException {
-        data.setCurrentUser("");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterLoginPage.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        // Adding the appHome.css file from the resources directory
-        String css = this.getClass().getResource("appHome.css").toExternalForm();
-        // add the stylesheet to the scene
-        scene.getStylesheets().add(css);
-        // setting invalid password label
-        stage.setScene(scene);
     }
 }
 
