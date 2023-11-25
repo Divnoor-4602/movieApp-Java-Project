@@ -1,6 +1,4 @@
 package client.movieapp;
-// todo: convert show button to primary when shows are selected
-// todo: use filter and search bar together
 
 import client.movieapp.movieshowdata.ApplicationData;
 import client.movieapp.movieshowdata.BridgeControllerInstance;
@@ -56,6 +54,9 @@ public class MovieController implements Initializable {
      */
 // used to check the times API is being called
     ImageView posterImageView;
+    /**
+     * The Current genre.
+     */
     ObservableList<String> currentGenre;
     /**
      * The Switch count.
@@ -73,12 +74,20 @@ public class MovieController implements Initializable {
      * The Movies to render.
      */
     static List<MovieDefinition> moviesToRender;
+    /**
+     * The Current searched filter movies.
+     */
+    static List<MovieDefinition> currentSearchedFilterMovies;
 
     /**
      * The Shows to render.
      */
     static List<ShowDefinition> showsToRender;
 
+    /**
+     * The Current searched filter shows.
+     */
+    static List<ShowDefinition> currentSearchedFilterShows;
     /**
      * The Current page.
      */
@@ -124,7 +133,9 @@ public class MovieController implements Initializable {
         if (switchCount == 0) {
             try {
                 moviesToRender = appDataObject.getRealTimeMovies();
+                currentSearchedFilterMovies = moviesToRender;
                 showsToRender = appDataObject.getRealTimeShows();
+                currentSearchedFilterShows = showsToRender;
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -217,6 +228,21 @@ public class MovieController implements Initializable {
         } else {
             return title;
         }
+    }
+
+    /**
+     * Genre labels generator string.
+     *
+     * @param genreO the genre o
+     * @param genreT the genre t
+     * @return the string
+     */
+    String genreLabelsGenerator (String genreO, String genreT) {
+        if (genreO != null && genreT != null) {
+            return genreO + " | " + genreT;
+        } else if(genreO != null) {
+            return genreO;
+        } else return Objects.requireNonNullElse(genreT, "");
     }
 
     /**
@@ -318,9 +344,7 @@ public class MovieController implements Initializable {
             movieDetailBox[i].getChildren().add(showTitle);
             //  render the genres which are available
             // System.out.println(movieToPass.getGenre_1() + " " + movieToPass.getGenre_2());
-            Label genres = new Label(shows.get(i).getGenre_2() + " " + (shows.get(i).getGenre_1() == null ? "" : "| " + shows.get(i).getGenre_1()));
-
-
+            Label genres = new Label(genreLabelsGenerator(showToPass.getGenre_1(), showToPass.getGenre_2()));
             // adding genre and their style class
             genres.getStyleClass().add("genres");
             // Setting id to vbox to apply css to it
@@ -347,23 +371,30 @@ public class MovieController implements Initializable {
         // get the search query
         String searchQuery = searchBox.getText().toLowerCase();
         // if the search query is an empty string render all the movies else render the search results
+        movieBox.getChildren().removeAll(movieBox.getChildren());
         if (!searchQuery.isEmpty()) {
             //    Empty the hbox to re-render the search results
-            movieBox.getChildren().removeAll(movieBox.getChildren());
+            List<ShowDefinition> searchedShows = SearchBarAlgorithm.searchAlgorithmShows(searchQuery, showsToRender);
+            currentSearchedFilterShows = searchedShows;
+            //   fetching the movies that fit the search by using a search function
+            List<MovieDefinition> searchedMovies = SearchBarAlgorithm.searchAlgorithmMovies(searchQuery, moviesToRender);
+            currentSearchedFilterMovies = searchedMovies;
             if (currentPage.equals("Shows")) {
-                List<ShowDefinition> searchedShows = SearchBarAlgorithm.searchAlgorithmShows(searchQuery, showsToRender);
                 // setting the searched movies in the hbox
                 setShowsInHBox(searchedShows);
             } else {
-                //   fetching the movies that fit the search by using a search function
-                List<MovieDefinition> searchedMovies = SearchBarAlgorithm.searchAlgorithmMovies(searchQuery, moviesToRender);
                 // setting the searched movies in the hbox
                 setMoviesInHbox(searchedMovies);
             }
         } else {
             //    Empty the hbox to re-render the search results
-            movieBox.getChildren().removeAll(movieBox.getChildren());
-            setMoviesInHbox(moviesToRender);
+                currentSearchedFilterMovies = moviesToRender;
+                currentSearchedFilterShows = showsToRender;
+            if (currentPage.equals("Movies")) {
+                setMoviesInHbox(moviesToRender);
+            } else {
+                setShowsInHBox(showsToRender);
+            }
         }
     }
 
@@ -387,7 +418,7 @@ public class MovieController implements Initializable {
         moviePane.getStyleClass().add("anchor-pane");
         movieBox.getStyleClass().add("anchor-pane");
         search.getStyleClass().add("success");
-        setShowsInHBox(showsToRender);
+        setShowsInHBox(currentSearchedFilterShows);
         // increasing the switch count so that api is not called again and again;
         switchCount++;
 
@@ -413,11 +444,16 @@ public class MovieController implements Initializable {
         moviePane.getStyleClass().add("anchor-pane");
         movieBox.getStyleClass().add("anchor-pane");
         search.getStyleClass().add("success");
-        setMoviesInHbox(moviesToRender);
+        setMoviesInHbox(currentSearchedFilterMovies);
         // increasing the switch count so that api is not called again and again;
         switchCount++;
     }
 
+    /**
+     * Filter by genre.
+     *
+     * @param genres the genres
+     */
     void filterByGenre(ObservableList<String> genres) {
         int count = 0;
         //  remove everything and re render
@@ -429,7 +465,7 @@ public class MovieController implements Initializable {
                     genres
             ) {
                 for (MovieDefinition movie :
-                        moviesToRender) {
+                        currentSearchedFilterMovies) {
                     if (!filteredMovie.contains(movie)) {
                         if (movie.getGenre_1().equals(genre)) {
                             System.out.println("comparing genre " + genre + ", movie: " + movie.getGenre_1());
@@ -450,7 +486,7 @@ public class MovieController implements Initializable {
                     genres
             ) {
                 for (ShowDefinition show :
-                        showsToRender) {
+                        currentSearchedFilterShows) {
                     if (!filteredShow.contains(show)) {
                         if (show.getGenre_1().equals(genre)) {
                             filteredShow.add(show);
@@ -460,7 +496,7 @@ public class MovieController implements Initializable {
                     }
                 }
             }
-            //     pass to the render shows function
+            //  pass to the render shows function
             setShowsInHBox(filteredShow);
 
         }

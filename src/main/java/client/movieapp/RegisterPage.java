@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -36,6 +37,8 @@ public class RegisterPage implements Initializable {
     @FXML
     public TextField emailField;
     @FXML
+    private AnchorPane outerPane;
+    @FXML
     public TextField passwordField;
     @FXML
     public Button signUpButton;
@@ -53,6 +56,7 @@ public class RegisterPage implements Initializable {
         } else {
             invalidPasswordLabel.setText("");
         }
+        outerPane.getStyleClass().add("outerPane");
     }
 
 
@@ -84,7 +88,6 @@ public class RegisterPage implements Initializable {
     // todo: save all this data to a mongodb database and link the register page to the login page
     // todo: if the user is successfully logged in go to the movie app otherwise re render the login page or
     // todo: go to register page if the email address does not exist in the database
-    // todo: make an email validator
 
     @FXML
     public void switchToLoginPage(ActionEvent event) throws IOException {

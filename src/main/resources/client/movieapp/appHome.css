@@ -14,6 +14,11 @@
     -fx-padding:0 0 0 100;
     -fx-background-inset: 0 0 0 100;
 }
+.inputBox{
+    -fx-text-fill: black;
+    -fx-background-color: black;
+    -fx-text-inner-color: black;
+}
 
 .drop-shadow :hover {
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.8), 10, 0, 0, 0);
@@ -29,6 +34,21 @@
     -fx-scale-y: 1.06;
     -fx-scale-z: 1.06;
 }
+
+.outerPane{
+    -fx-background-color: white;
+}
+
+.innerPane{
+    -fx-background-color: black;
+    -fx-effect: dropshadow(three-pass-box, black, 15, 0, 0, 0);
+    -fx-text-fill: white;
+}
+.rightPane{
+    -fx-text-fill: white;
+}
+
+
 .button:focused, .toggle-button:focused,
 .split-menu-button:focused, .menu-button:focused,
 .number-button:focused,

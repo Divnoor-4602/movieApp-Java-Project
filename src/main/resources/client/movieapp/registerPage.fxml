@@ -7,29 +7,36 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="423.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.movieapp.RegisterPage">
+<AnchorPane fx:id="outerPane" prefHeight="420.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.movieapp.RegisterPage">
    <children>
       <BorderPane fx:id="registerBox" layoutX="39.0" layoutY="24.0" prefHeight="375.0" prefWidth="570.0">
          <center>
-            <AnchorPane prefHeight="330.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="366.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="24.0" layoutY="14.0" prefHeight="22.0" prefWidth="95.0" text="Register to TMD" />
-                  <TextField fx:id="firstName" layoutX="26.0" layoutY="51.0" prefHeight="34.0" prefWidth="189.0" promptText="Enter your first name" />
-                  <TextField fx:id="lastName" layoutX="25.0" layoutY="99.0" prefHeight="31.0" prefWidth="189.0" promptText="Enter your last name" />
-                  <TextField fx:id="emailField" layoutX="25.0" layoutY="143.0" prefHeight="29.0" prefWidth="192.0" promptText="email@gmail.com" />
-                  <Button fx:id="signUpButton" layoutX="38.0" layoutY="231.0" mnemonicParsing="false" onAction="#signUp" prefHeight="26.0" prefWidth="166.0" text="Sign up now" />
-                  <Label layoutX="26.0" layoutY="270.0" text="Already have an account?" />
-                  <Hyperlink fx:id="loginRedirectLabel" layoutX="168.0" layoutY="267.0" onAction="#switchToLoginPage" text="Go to login page" />
+                  <Label layoutX="24.0" layoutY="14.0" prefHeight="22.0" prefWidth="129.0" text="Register to TMD">
+                     <font>
+                        <Font name="Impact" size="17.0" />
+                     </font></Label>
+                  <TextField fx:id="firstName" layoutX="26.0" layoutY="51.0" prefHeight="31.0" prefWidth="189.0" promptText="Enter your first name" />
+                  <TextField fx:id="lastName" layoutX="27.0" layoutY="91.0" prefHeight="31.0" prefWidth="189.0" promptText="Enter your last name" />
+                  <TextField fx:id="emailField" layoutX="28.0" layoutY="131.0" prefHeight="31.0" prefWidth="189.0" promptText="email@gmail.com" />
+                  <Button fx:id="signUpButton" layoutX="57.0" layoutY="221.0" mnemonicParsing="false" onAction="#signUp" prefHeight="34.0" prefWidth="124.0" text="Sign up now" />
+                  <Label layoutX="26.0" layoutY="279.0" text="Already have an account?" />
+                  <Hyperlink fx:id="loginRedirectLabel" layoutX="168.0" layoutY="276.0" onAction="#switchToLoginPage" text="Go to login page" />
                   <Label fx:id="invalidPasswordLabel" layoutX="23.0" layoutY="299.0" prefHeight="17.0" prefWidth="176.0" textFill="#eb0000" />
-                  <PasswordField fx:id="passwordField" layoutX="23.0" layoutY="183.0" prefHeight="28.0" prefWidth="195.0" promptText="Enter your password" />
+                  <PasswordField fx:id="passwordField" layoutX="30.0" layoutY="172.0" prefHeight="31.0" prefWidth="189.0" promptText="Enter your password" />
                </children>
             </AnchorPane>
          </center>
          <bottom>
-            <AnchorPane prefHeight="34.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="28.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="206.0" layoutY="15.0" text="The Movies Database" />
+                  <Label layoutX="229.0" layoutY="17.0" prefWidth="113.0" text="The Movies Database">
+                     <font>
+                        <Font name="Impact" size="13.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
          </bottom>

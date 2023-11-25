@@ -115,7 +115,5 @@ public class IndividualMovieController implements Initializable {
         genreOne.getStyleClass().add("genres");
         genreTwo.getStyleClass().add("genres");
         movieDescription.getStyleClass().add("genres");
-
-        //     todo: render webview
     }
 }

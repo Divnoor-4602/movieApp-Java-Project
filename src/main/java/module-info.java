@@ -6,14 +6,15 @@ module client.movieapp {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires java.net.http;
-    requires com.google.gson;
+
     requires javafx.web;
     requires java.desktop;
+    requires com.google.gson;
 
 
     exports client.movieapp.movieshowdata;
     opens client.movieapp.movieshowdata to com.google.gson, javafx.fxml, javafx.web;
     exports client.movieapp;
-    opens client.movieapp to com.google.gson, javafx.fxml, javafx.web;
+    opens client.movieapp to  com.google.gson, javafx.fxml, javafx.web;
 
 }
