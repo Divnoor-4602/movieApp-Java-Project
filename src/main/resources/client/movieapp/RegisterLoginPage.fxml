@@ -11,41 +11,55 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.movieapp.RegisterLoginPage">
-   <children>
-      <BorderPane fx:id="mainLoginBox" layoutX="26.0" layoutY="25.0" prefHeight="374.0" prefWidth="579.0">
-         <right>
-            <AnchorPane fx:id="rightPane" prefHeight="301.0" prefWidth="270.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="companyTitle" layoutX="25.0" layoutY="14.0" prefHeight="29.0" prefWidth="214.0" text="The Movie Database" textFill="WHITE">
-                     <font>
-                        <Font name="Impact" size="16.0" />
-                     </font></Label>
-                  <Label fx:id="emailLabel" layoutX="25.0" layoutY="60.0" prefHeight="25.0" prefWidth="51.0" text="Email" textFill="WHITE">
-                     <font>
-                        <Font name="Impact" size="14.0" />
-                     </font></Label>
-                  <TextField fx:id="emailTextBox" layoutX="25.0" layoutY="85.0" promptText="Enter your email" />
-                  <Label fx:id="passwordLabel" layoutX="25.0" layoutY="142.0" prefHeight="17.0" prefWidth="67.0" text="Password" textFill="WHITE">
-                     <font>
-                        <Font name="Impact" size="14.0" />
-                     </font></Label>
-                  <Button fx:id="loginInButton" layoutX="27.0" layoutY="214.0" mnemonicParsing="false" onAction="#loginAccount" text="Sign in" />
-                  <Label fx:id="registerAccountLabel" layoutX="25.0" layoutY="283.0" prefHeight="17.0" prefWidth="167.0" text="Not registered yet?" textFill="WHITE" />
-                  <Hyperlink fx:id="createNewAccountPage" layoutX="130.0" layoutY="280.0" onAction="#registerNewAccount" text="Create an account" />
-                  <PasswordField fx:id="passwordTextBox" layoutX="26.0" layoutY="168.0" promptText="Enter your password" />
-                  <Label fx:id="invalidEmailLabel" layoutX="124.0" layoutY="64.0" prefHeight="13.0" prefWidth="115.0" textFill="#f00000" />
-                  <Label fx:id="invalidPasswordLabel" layoutX="124.0" layoutY="142.0" textFill="RED" />
-               </children>
-            </AnchorPane>
-         </right>
-         <center>
-            <ImageView fitHeight="294.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="file:/Users/divnoor/IdeaProjects/javafx-learning/movieApp/src/main/java/client/movieapp/—Pngtree—cartoon%20movie%20popcorn%20film%20glasses_6125864.png" />
-               </image>
-            </ImageView>
-         </center>
-      </BorderPane>
-   </children>
+<AnchorPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="424.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.movieapp.RegisterLoginPage">
+    <children>
+        <BorderPane fx:id="mainLoginBox" layoutX="26.0" layoutY="25.0" prefHeight="374.0" prefWidth="579.0">
+            <right>
+                <AnchorPane fx:id="rightPane" prefHeight="301.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label fx:id="companyTitle" layoutX="25.0" layoutY="14.0" prefHeight="29.0" prefWidth="214.0"
+                               text="The Movie Database" textFill="WHITE">
+                            <font>
+                                <Font name="Impact" size="16.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="emailLabel" layoutX="25.0" layoutY="60.0" prefHeight="25.0" prefWidth="51.0"
+                               text="Email" textFill="WHITE">
+                            <font>
+                                <Font name="Impact" size="14.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="emailTextBox" layoutX="25.0" layoutY="85.0" promptText="Enter your email"/>
+                        <Label fx:id="passwordLabel" layoutX="25.0" layoutY="142.0" prefHeight="17.0" prefWidth="67.0"
+                               text="Password" textFill="WHITE">
+                            <font>
+                                <Font name="Impact" size="14.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="loginInButton" layoutX="27.0" layoutY="214.0" mnemonicParsing="false"
+                                onAction="#loginAccount" text="Sign in"/>
+                        <Label fx:id="registerAccountLabel" layoutX="25.0" layoutY="283.0" prefHeight="17.0"
+                               prefWidth="167.0" text="Not registered yet?" textFill="WHITE"/>
+                        <Hyperlink fx:id="createNewAccountPage" layoutX="130.0" layoutY="280.0"
+                                   onAction="#registerNewAccount" text="Create an account"/>
+                        <PasswordField fx:id="passwordTextBox" layoutX="26.0" layoutY="168.0"
+                                       promptText="Enter your password"/>
+                        <Label fx:id="invalidEmailLabel" layoutX="124.0" layoutY="64.0" prefHeight="13.0"
+                               prefWidth="115.0" textFill="#f00000"/>
+                        <Label fx:id="invalidPasswordLabel" layoutX="124.0" layoutY="142.0" textFill="RED"/>
+                    </children>
+                </AnchorPane>
+            </right>
+            <center>
+                <ImageView fitHeight="294.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true"
+                           BorderPane.alignment="CENTER">
+                    <image>
+                        <Image url="file:/Users/divnoor/IdeaProjects/javafx-learning/movieApp/src/main/java/client/movieapp/—Pngtree—cartoon%20movie%20popcorn%20film%20glasses_6125864.png"/>
+                    </image>
+                </ImageView>
+            </center>
+        </BorderPane>
+    </children>
 </AnchorPane>

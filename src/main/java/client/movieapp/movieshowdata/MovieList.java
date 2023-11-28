@@ -3,12 +3,14 @@ package client.movieapp.movieshowdata;
 import java.util.List;
 
 import client.movieapp.movieshowdata.MovieDefinition;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 /**
  * The type Movie list.
  */
 public class MovieList {
 
+    @BsonProperty("movie list")
     private List<MovieDefinition> movies;
 
     /**
@@ -28,8 +30,6 @@ public class MovieList {
     public void setMovies(List<MovieDefinition> movies) {
         this.movies = movies;
     }
-
-
 
 
 }

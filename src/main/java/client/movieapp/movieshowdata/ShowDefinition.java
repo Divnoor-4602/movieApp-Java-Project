@@ -13,26 +13,56 @@ public class ShowDefinition {
     private String release_date;
     private String show_youtube_url;
 
+    /**
+     * Gets show ratings.
+     *
+     * @return the show ratings
+     */
     public String getShow_ratings() {
         return show_ratings;
     }
 
+    /**
+     * Sets show ratings.
+     *
+     * @param show_ratings the show ratings
+     */
     public void setShow_ratings(String show_ratings) {
         this.show_ratings = show_ratings;
     }
 
+    /**
+     * Gets release date.
+     *
+     * @return the release date
+     */
     public String getRelease_date() {
         return release_date;
     }
 
+    /**
+     * Sets release date.
+     *
+     * @param release_date the release date
+     */
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
 
+    /**
+     * Gets show youtube url.
+     *
+     * @return the show youtube url
+     */
     public String getShow_youtube_url() {
         return show_youtube_url;
     }
 
+    /**
+     * Sets show youtube url.
+     *
+     * @param show_youtube_url the show youtube url
+     */
     public void setShow_youtube_url(String show_youtube_url) {
         this.show_youtube_url = show_youtube_url;
     }
