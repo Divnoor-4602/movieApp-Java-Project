@@ -19,6 +19,7 @@
 
 **Example response**
 
+```javascript
 {
   "movies": [
     {
@@ -33,3 +34,6 @@
       "movie_youtube_url": "https://www.youtube.com/watch?v=G_AEL-Xo5l8"
     },
   }
+
+```
+
