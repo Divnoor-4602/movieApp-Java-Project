@@ -10,12 +10,15 @@
 
 
 ### Home Page
+<img width="1005" alt="image" src="https://github.com/Divnoor-4602/movieApp-Java-Project/assets/120365130/55ca1c0f-46bd-4079-a8d7-f9293150405e">
 
 
 
 ### API JSON
-**Endpoint: ** https://movie-api-tmdb.onrender.com/currentMovies
+**Endpoint:** https://movie-api-tmdb.onrender.com/currentMovies
+
 **Example response**
+
 {
   "movies": [
     {
